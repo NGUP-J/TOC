@@ -1,7 +1,31 @@
-.heading {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
+nav{
+    background-color: #f8e9be;
+}
+body {
+    font-family: 'Kanit', sans-serif;
+    background-color:  #fff8e7;
+}
+
+#Alert_Box {
+    max-width: 500px;
+    width: 100%;
+}
+#q1{
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+#Reject #rule{
+    background-color: #ffc7c7;
+}
+
+#Reject #rule_description{
+    background-color: #ffecec;
+}
+
+#Accept #rule{
+    background-color: #aef3ae;
+}
+
+#Accept #rule_description {
+    background-color: #e3ffe3;
 }
