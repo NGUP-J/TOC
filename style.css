@@ -1,28 +1,40 @@
-nav{
+nav {
     background-color: #f8e9be;
 }
+
 body {
     font-family: 'Kanit', sans-serif;
-    background-color:  #fff8e7;
+    background-color: #fff8e7;
 }
 
 #Alert_Box {
     max-width: 500px;
     width: 100%;
 }
-#q1{
+
+#q1,
+#q2,
+#q3,
+#q4,
+#q5,
+#q6,
+#q7,
+#q8,
+#q9,
+#q10 {
     padding-top: 15px;
     padding-bottom: 15px;
 }
-#Reject #rule{
+
+#Reject #rule {
     background-color: #ffc7c7;
 }
 
-#Reject #rule_description{
+#Reject #rule_description {
     background-color: #ffecec;
 }
 
-#Accept #rule{
+#Accept #rule {
     background-color: #aef3ae;
 }
 
