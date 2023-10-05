@@ -9,9 +9,12 @@ import {
   upperAlphaSet,
 } from "./utils.js";
 
-document.getElementById("input").addEventListener("keyup", handleinput);
-const userInput = document.getElementById("input");
+document.getElementById("input").addEventListener("input", handleinput);
+const eleLines = document.querySelectorAll(".simulate-dfa .line");
+const eleDownArrows = document.querySelectorAll(".simulate-dfa .down-arrow");
+const eleCircles = document.querySelectorAll(".simulate-dfa .circle");
 
+const userInput = document.getElementById("input");
 
 let initialState = "q0";
 let states = [
@@ -39,7 +42,7 @@ let rule_des = [
   "รูปนี้มาจากจังหวัดอะไร",
   "code นี้ Output ออกมาเป็นอะไร",
   "Pig + Dog = Chicken หมูมีค่าเท่าไหร่",
-]
+];
 let alphabets = [
   ...upperAlphaSet(),
   ...lowerAlphaSet(),
@@ -73,6 +76,21 @@ let transitions = {
   ...tenthTransition,
 };
 
+function updateStateDFA(pass_state) {
+  eleLines.forEach((ele, idx) => {
+    if (idx < pass_state.length) {
+      ele.classList.add("pass");
+      eleDownArrows[idx].classList.add("pass");
+      eleCircles[idx].classList.add("pass");
+      console.log("YO");
+    } else {
+      ele.classList.remove("pass");
+      eleDownArrows[idx].classList.remove("pass");
+      eleCircles[idx].classList.remove("pass");
+    }
+  });
+}
+
 function handleinput() {
   const pass_state = [];
   function isAccepted() {
@@ -88,20 +106,24 @@ function handleinput() {
         return false;
       }
       if (!alphabets.includes(char)) return false;
-      if (!pass_state.includes(currentState) && states.includes(currentState)) { pass_state.push(currentState); }
+      if (!pass_state.includes(currentState) && states.includes(currentState)) {
+        pass_state.push(currentState);
+      }
       currentState = transitions[currentState][char] || currentState;
-      if (!pass_state.includes(currentState) && states.includes(currentState)) { pass_state.push(currentState); }
+      if (!pass_state.includes(currentState) && states.includes(currentState)) {
+        pass_state.push(currentState);
+      }
 
-
+      console.log(pass_state);
       console.log("_curr", currentState);
-      if (currentState === finalState) return true;
     }
-
+    updateStateDFA(pass_state);
+    if (currentState === finalState) return true;
   }
   const bool_isAccept = isAccepted();
   editAlertBox(pass_state);
   if (bool_isAccept) {
-    alert("You Win!!!")
+    alert("You Win!!!");
   }
 }
 function editAlertBox(pass_state) {
@@ -117,32 +139,33 @@ function editAlertBox(pass_state) {
         check_Alert.querySelector("#Reject").id = "Accept";
       }
       continue;
-    }
-    else if (check_Alert == null && info_index != 10) {
-      const template = document.getElementById('q-template');
+    } else if (check_Alert == null && info_index != 10) {
+      const template = document.getElementById("q-template");
       const clone = document.importNode(template.content, true);
 
       clone.getElementById("q-state").id = states[states.indexOf(state) + 1];
       clone.getElementById("Accept-Reject").id = "Reject";
 
-      const str_rule = clone.getElementById('str-rule');
-      str_rule.textContent = 'กฏข้อที่ '.concat(info_index + 1);
+      const str_rule = clone.getElementById("str-rule");
+      str_rule.textContent = "กฏข้อที่ ".concat(info_index + 1);
 
-      const str_rule_des = clone.getElementById('str-rule-des');
+      const str_rule_des = clone.getElementById("str-rule-des");
       str_rule_des.textContent = rule_des[info_index];
       if (info_index == 6) {
         const img = new Image();
         img.src = "/picture/000017.JPG";
         img.id = "image";
         clone.getElementById("rule_description").appendChild(img);
-      }else if (info_index==7){
+      } else if (info_index == 7) {
         const img = new Image();
         img.src = "/picture/bkk.jpg";
         img.id = "image";
         clone.getElementById("rule_description").appendChild(img);
-      }else if (info_index==8){
+      } else if (info_index == 8) {
         const para = document.createElement("p");
-        const node = document.createTextNode(" ++++++++++[>+>+++>+++++++>++++++++++<<<<-]>>+++++++++++++++++++.");
+        const node = document.createTextNode(
+          " ++++++++++[>+>+++>+++++++>++++++++++<<<<-]>>+++++++++++++++++++."
+        );
         para.appendChild(node);
         clone.getElementById("rule_description").appendChild(para);
       }
@@ -152,15 +175,17 @@ function editAlertBox(pass_state) {
   }
   //loop ทำลาย alertbox
   for (let i = 8; i >= info_index; i--) {
-
     if (document.getElementById(states[i + 2]) != null) {
       const check_Alert = document.getElementById(states[i + 2]);
       check_Alert.remove();
-      document.getElementById(states[i + 1]).querySelector("#Accept").id = "Reject";
+      document.getElementById(states[i + 1]).querySelector("#Accept").id =
+        "Reject";
     }
   }
-  if (info_index == 9 && document.getElementById("q10").querySelector("#Accept") != null) {
+  if (
+    info_index == 9 &&
+    document.getElementById("q10").querySelector("#Accept") != null
+  ) {
     document.getElementById("q10").querySelector("#Accept").id = "Reject";
   }
-
 }

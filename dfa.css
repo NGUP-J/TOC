@@ -1,0 +1,70 @@
+.simulate-dfa {
+    position: fixed;
+    height: 80%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    top: 4rem;
+    right: 2rem;
+    border: 1.5px solid gray;
+    border-radius: 1em;
+    padding: 2rem 1rem;
+}
+
+.simulate-dfa::-webkit-scrollbar {
+  display: none;
+}
+
+
+.simulate-dfa .wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.simulate-dfa .circle.final-state {
+    margin-top: .5rem;
+    box-shadow: 0px 0px 0px 5px white, 0px 0px 0px 7px black;
+}
+
+.simulate-dfa .wrapper > .circle {
+    width: 50px;
+    aspect-ratio: 1;
+    border: 2px solid black;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-size: 1rem;
+    font-weight: bolder;
+    transition: 0.3s ease;
+}
+
+.simulate-dfa .wrapper > .line {
+    border: 1px solid black;
+    height: 2rem;
+}
+
+.simulate-dfa .wrapper > .down-arrow {
+    border-left: 4px solid transparent;
+	border-right: 4px solid transparent;
+	border-top: 8px solid black;
+    width: 0;
+    height: 0;
+}
+
+.simulate-dfa .wrapper > :is(.circle.pass, .line.pass) {
+    border-color: green;
+    color: green;
+}
+
+.simulate-dfa .circle.pass.final-state {
+    box-shadow: 0px 0px 0px 5px white, 0px 0px 0px 7px green;
+}
+
+.simulate-dfa .wrapper > .down-arrow.pass {
+    border-top-color: green;
+}
+
+.simulate-dfa .wrapper > .circle.pass {
+    font-size: 1.25rem;
+}
