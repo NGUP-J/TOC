@@ -1,0 +1,31 @@
+.source-code {
+    display: grid;
+    place-items: center;
+    height: 90vh;
+}
+
+.source-code .wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid #0d1117;
+    padding: 1rem 2rem;
+    border-radius: 1rem;
+    background-color: transparent;
+    transition: 0.3s ease;
+}
+
+.source-code .wrapper:is(:hover, :focus-visible) {
+    background-color: #0d1117;
+}
+
+.source-code .wrapper > .logo-img {
+    width: 50px;
+    aspect-ratio: 1;
+    
+}
+
+.source-code .wrapper > .link {
+    margin-left: 1em;
+    font-size: 1.5rem;
+}
